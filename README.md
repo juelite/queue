@@ -74,6 +74,7 @@
     
 #### 生产者接口代码
     
+    ```golang
     func (c *IndexCtl) PushQueue() {
     	params := c.Input()                                         //获取输入参数
     	service.Log("push_queue", params)                           //记录日志
@@ -96,10 +97,11 @@
     	is := new(service.IndexService)                             
     	is.LPushRedis(topic, redis_queue)                           //lpush到redis的topic列表中
     	c.ReturnData(200, "success", nil)
-    }
+    }```
 
 #### 消费者代码
 
+    ```golang
     func (t *ConsumerTask) consumer() {
     	topics, _ := beego.AppConfig.GetSection("consumers")                                //拿到所有消费者
     	for k := range topics {
@@ -155,4 +157,4 @@
     		fmt.Println(err.Error())
     	}
     	fmt.Println("消费完成")
-    }
+    }```
